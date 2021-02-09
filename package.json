@@ -1,0 +1,30 @@
+{
+  "name": "sendit",
+  "version": "1.0.0",
+  "description": "An instant messaging web application for CS350",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdrikGG/sendit.git"
+  },
+  "keywords": [
+    "mongoDB",
+    "express",
+    "react",
+    "node",
+    "restful",
+    "api"
+  ],
+  "author": "Adrik Gurganus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdrikGG/sendit/issues"
+  },
+  "homepage": "https://github.com/AdrikGG/sendit#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
