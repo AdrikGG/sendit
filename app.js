@@ -6,14 +6,22 @@ const mongoose = require('mongoose');
 
 const userRoutes =  require('./api/routes/users');
 const roomRoutes =  require('./api/routes/rooms');
-const { test } = require('picomatch');
+require("dotenv").config();
 
 mongoose.connect(
-    'mongodb+srv://AdrikG:FeetbytheFoot7811@cluster0.uw5uf.mongodb.net/test?retryWrites=true&w=majority', 
+    process.env.DATABASE, 
     {
     dbName: "test",
     useNewUrlParser: true,
     useUnifiedTopology: true
+});
+
+mongoose.connection.on("error", (err) => {
+    console.log("Mongoose Connection ERRER: " + err.message);
+});
+
+mongoose.connection.once("open", () => {
+    console.log("MongoDB Connected");
 });
 
 app.use(morgan('dev'));
@@ -34,6 +42,12 @@ app.use((req, res, next) => {
 
 app.use('/users', userRoutes);
 app.use('/rooms', roomRoutes);
+
+app.use('/', (req, res, next) => {
+    res.json({
+        message: "Sendit Homepage"
+    });
+});
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
