@@ -1,0 +1,32 @@
+.create-room-form {
+    width: 40rem;
+    max-width: 80%;
+    margin: 5rem auto;
+}
+
+.create-room {
+    margin-bottom: 1rem;
+}
+
+.create-room label,
+.create-room input {
+    width: 100%;
+    display: block;
+}
+
+.create-room button {
+    background: grey;
+    font: inherit;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 0.25rem 1rem;
+    margin-right: 1rem;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
+    color: white;
+}
+
+.create-room button:hover,
+.create-room button:active {
+    background: rgb(75, 75, 75);
+    border-color: rgb(75, 75, 75);
+}
