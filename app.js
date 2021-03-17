@@ -44,14 +44,8 @@ app.use((req, res, next) => {
 });
 
 app.use('/user', userRoutes);
-app.use('/rooms', roomRoutes);
+app.use('/room', roomRoutes);
 app.use('/', dashboardRoute);
-
-// app.use('/', (req, res, next) => {
-//     res.json({
-//         message: "Sendit Homepage"
-//     });
-// });
 
 app.use((req, res, next) => {
     const error = new Error('Not found');

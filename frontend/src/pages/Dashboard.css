@@ -1,17 +1,16 @@
-.create-room-form {
+.create-room {
+    display: inline-block;
     width: 40rem;
     max-width: 80%;
-    margin: 5rem auto;
-}
-
-.create-room {
-    margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .create-room label,
 .create-room input {
-    width: 100%;
-    display: block;
+    width: 30%;
+    margin: 1em;
+    max-height: 2em;
 }
 
 .create-room button {
@@ -20,13 +19,51 @@
     border: 1px solid black;
     border-radius: 5px;
     padding: 0.25rem 1rem;
-    margin-right: 1rem;
+    margin: 1rem;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
     color: white;
 }
 
 .create-room button:hover,
 .create-room button:active {
+    background: rgb(75, 75, 75);
+    border-color: rgb(75, 75, 75);
+}
+
+.room-component {
+    display: inline-block;
+    width: 40rem;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.room-link {
+    display: inline-block;
+    width: 20rem;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.room-component h1 {
+    width: 100%;
+}
+
+.room-component button {
+    background: grey;
+    font: inherit;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 0.25rem 1rem;
+    margin-left: auto;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
+    color: white;
+    justify-self: end;
+}
+
+.room-component button:hover,
+.room-component button:active {
     background: rgb(75, 75, 75);
     border-color: rgb(75, 75, 75);
 }

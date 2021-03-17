@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 
 import './Auth.css';
+import AuthContext from '../components/Context/auth-context';
 
 class SignupPage extends Component {
+    static contextType = AuthContext;
+    
     constructor(props) {
         super(props);
         this.usernameEl = React.createRef();
@@ -31,6 +34,7 @@ class SignupPage extends Component {
         const Json = await response.json();
         console.log(Json);
         localStorage.setItem("token", Json.token);
+        this.context.login(Json.token, Json.username, Json.userId);
     }
 
     render() {

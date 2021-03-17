@@ -6,36 +6,39 @@ const User = require('../models/user');
 const Room = require('../models/room');
 
 router.post('/dashboard', checkAuth, (req, res, next) => {
-    // console.log(req.userData);
+    console.log(req.userData);
     const userId = req.userData.userId;
     User.findById(userId)
     .select("rooms")
     .exec()
-    .then(docs => {
+    .then(async docs => {
         console.log(docs);
-        const response = []
-        docs.rooms.forEach(doc => {
-            Room.findById(doc._id)
-            .then(result => {
-                if(!result) {
-                    return;
+        let roomArray = [];
+        for (let index = 0; index < docs.rooms.length; index++) {
+            const doc = docs.rooms[index];
+            let room = await Room.findById(doc._id);
+            if(!room) {
+                return;
+            }
+            if(room.messages.length < 1) {
+                newroom = {
+                    roomId: room._id,
+                    roomName: room.name,
+                    lastMessage: "No messages"
                 }
-                if(result.messages.length < 1) {
-                    room = {
-                        roomId: doc._id,
-                        lastMessage: "No messages"
-                    }
-                } else {
-                    room = {
-                        roomId: doc._id,
-                        lastMessage: doc.messages[doc.messages.length-1]
-                    }
+            } else {
+                newroom = {
+                    roomId: room._id,
+                    roomName: room.name,
+                    lastMessage: room.messages[room.messages.length-1]
                 }
-                console.log(room);
-                response.push(room);
-            })
-            // res.status(200).json(response);
-        });
+            }
+            // console.log(room);
+            roomArray.push(newroom);
+            console.log(newroom.roomId, newroom.roomName);
+        }
+        // console.log(roomArray);
+        res.status(200).json({rooms: roomArray});
     })
     .catch(err => {
         console.log(err);
