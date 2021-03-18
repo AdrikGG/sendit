@@ -3,7 +3,7 @@ import React from 'react';
 import './Message.css';
 
 const Message = ({ message: { text, username } }) => {
-
+  console.log("In message");
   return (
     <div className="messageContainer justifyStart">
       <div className="messageBox backgroundLight">

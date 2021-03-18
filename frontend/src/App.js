@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
-import socketIOClient from "socket.io-client";
 
 import SignupPage from './pages/signup';
 import LoginPage from './pages/login';

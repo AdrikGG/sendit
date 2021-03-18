@@ -6,9 +6,11 @@ const RoomController = require('../controllers/rooms');
 
 router.get('/', RoomController.rooms_get);
 
-router.get('/join', RoomController.room_join)
+router.post('/join', checkAuth, RoomController.room_join);
 
 router.post('/create', checkAuth, RoomController.room_post);
+
+router.patch('/:roomId', checkAuth, RoomController.room_patch);
 
 router.get('/:roomId', checkAuth, RoomController.room_get);
 

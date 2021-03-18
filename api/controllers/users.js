@@ -26,7 +26,7 @@ exports.user_signup = (req, res, next) => {
                         });
                         user
                             .save()
-                            .then(result => {
+                            .then(() => {
                                 const token = jwt.sign({
                                     username: user.username,
                                     userId: user._id
@@ -133,13 +133,13 @@ exports.user_post = (req, res, next) => {
 }
 
 exports.user_get = (req, res, next) => {
-    const id = req.params.userId;
+    const id = req.userData.userId;
     User.findById(id)
     .exec()
     .then(doc => {
-        comsole.log("From database", doc);
+        console.log("From database", doc);
         if(doc) {
-            res.status(200).json(doc);
+            res.status(200).json({username: doc.username});
         } else {
             res.status(404).json({message: 'No valid entry founr for given id'});
         }

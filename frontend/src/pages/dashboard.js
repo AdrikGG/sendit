@@ -14,6 +14,7 @@ class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.roomnameEl = React.createRef();
+        this.roomidEl = React.createRef();
 
         this.displayRooms();
         this.render();
@@ -36,7 +37,7 @@ class Dashboard extends Component {
         console.log(this.state.rooms);
     }
 
-    submitHandler = async event => {
+    createHandler = async event => {
         event.preventDefault();
         const token = localStorage.getItem("token");
         const roomname = this.roomnameEl.current.value;
@@ -56,9 +57,62 @@ class Dashboard extends Component {
             }
         })
         const Json = await response.json();
+        console.log(Json.createdRoom);
+        const addedRoom = {
+            roomId: Json.createdRoom._id,
+            roomName: Json.createdRoom.name,
+            lastMessage: null
+        }
+        if(Json.createdRoom.messages.length > 0) {
+            addedRoom.lastMessage = Json.createdRoom.messages[Json.createdRoom.messages.length-1];
+        } else {
+            addedRoom.lastMessage = "No messages"
+        }
         this.setState(prevState => {
             return {
-                rooms: [...prevState.rooms, Json]
+                rooms: [...prevState.rooms, addedRoom]
+            }
+        });
+    }
+
+    joinHandler = async event => {
+        event.preventDefault();
+        const token = localStorage.getItem("token");
+        const roomId = this.roomidEl.current.value;
+
+        // if not propper string, then return
+
+        const body = {
+            id: roomId
+        }
+        
+        const response = await fetch('/room/join', {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        const Json = await response.json();
+        console.log(Json);
+        console.log(Json.joinedRoom);
+        if(Json.error) {
+            return;
+        }
+        const addedRoom = {
+            roomId: Json.joinedRoom._id,
+            roomName: Json.joinedRoom.name,
+            lastMessage: null
+        }
+        if(Json.joinedRoom.messages.length > 0) {
+            addedRoom.lastMessage = Json.joinedRoom.messages[Json.joinedRoom.messages.length-1];
+        } else {
+            addedRoom.lastMessage = "No messages"
+        }
+        this.setState(prevState => {
+            return {
+                rooms: [...prevState.rooms, addedRoom]
             }
         });
     }
@@ -104,11 +158,18 @@ class Dashboard extends Component {
     render() {
         return (
             <div>
-                <form className="create-room-form" onSubmit={this.submitHandler}>
+                <form className="create-room-form" onSubmit={this.createHandler}>
                     <div className="create-room">
-                        <label htmlFor="roomname">Room name</label>
+                        <label htmlFor="roomname">Room Name</label>
                         <input type="roomname" id="roomname" placeholder="Room name" ref={this.roomnameEl} required />
-                        <button type="submit">Create new room</button>
+                        <button type="submit">Create New Room</button>
+                    </div>
+                </form>
+                <form className="create-room-form" onSubmit={this.joinHandler}>
+                    <div className="join-room">
+                        <label htmlFor="roomid">Room ID</label>
+                        <input type="roomid" id="roomid" placeholder="Room id" ref={this.roomidEl} required />
+                        <button type="submit">Join Room</button>
                     </div>
                 </form>
                 <div className="room-display">

@@ -30,6 +30,38 @@
     border-color: rgb(75, 75, 75);
 }
 
+.join-room {
+    display: inline-block;
+    width: 40rem;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.join-room label,
+.join-room input {
+    width: 30%;
+    margin: 1.56em;
+    max-height: 2em;
+}
+
+.join-room button {
+    background: grey;
+    font: inherit;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 0.25rem 1rem;
+    margin: 0.65rem;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
+    color: white;
+}
+
+.join-room button:hover,
+.join-room button:active {
+    background: rgb(75, 75, 75);
+    border-color: rgb(75, 75, 75);
+}
+
 .room-component {
     display: inline-block;
     width: 40rem;

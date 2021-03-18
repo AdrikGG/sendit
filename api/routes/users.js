@@ -12,7 +12,7 @@ router.get('/', UserController.users_get);
 
 router.post('/', UserController.user_post);
 
-router.get('/:userId', checkAuth, UserController.user_get);
+router.get('/username', checkAuth, UserController.user_get);
 
 router.patch('/:userId', checkAuth, UserController.user_update);
 

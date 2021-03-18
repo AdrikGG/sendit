@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link, Redirect } from 'react-router-dom'
 
 import './Auth.css';
 import AuthContext from '../components/Context/auth-context';
@@ -6,6 +7,10 @@ import AuthContext from '../components/Context/auth-context';
 class SignupPage extends Component {
     static contextType = AuthContext;
     
+    state = {
+        submitted: false
+    }
+
     constructor(props) {
         super(props);
         this.usernameEl = React.createRef();
@@ -35,9 +40,13 @@ class SignupPage extends Component {
         console.log(Json);
         localStorage.setItem("token", Json.token);
         this.context.login(Json.token, Json.username, Json.userId);
+        this.setState({submitted: true});
     }
 
     render() {
+        if(this.state.submitted) {
+            return <Redirect to="/home" />
+        }
         return (
             <form className="auth-form" onSubmit={this.submitHandler}>
                 <div className="form-control">
@@ -49,8 +58,10 @@ class SignupPage extends Component {
                     <input type="password" id="password" ref={this.passwordEl} />
                 </div>
                 <div className="form-actions">
-                    <button type="button">Switch to login</button>
                     <button type="submit">Submit</button>
+                </div>
+                <div>
+                    <Link to="/user/login">back to login</Link>
                 </div>
             </form>
         );
