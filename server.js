@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
         // console.log(userData);
         // console.log(room);
         // console.log(room.name);
-        addUser({ sid: socket.id, username: userData.username, roomName: room.name });
+        addUser({ sid: socket.id, username: userData.username, roomId: room._id });
 
         socket.emit('message', { username: 'bot', text: `${userData.username}, welcome to ${room.name}` });
         socket.broadcast.to(roomId).emit('message', { username: 'bot', text: `${userData.username}, has joined!`});
@@ -46,17 +46,30 @@ io.on('connection', (socket) => {
     socket.on('send message', async (message, roomId) => {
         console.log("In send message (server)");
         const user = getUser(socket.id); 
+        if(!user) {
+            console.log("Server restart needed")
+        }
+        console.log(user)
 
         console.log(message);
 
+        const newMessage = {
+            username: user.username,
+            text: message
+        }
+
         // commit massage to the database
-        await Room.findOneAndUpdate(
+        await Room.findByIdAndUpdate(
             {_id: roomId},
-            { $push: { messages: message } }
+            { $push: { messages: newMessage } }
         )
         .catch(err => {
             console.log(err);
         });
+
+        await findRoom(roomId);
+
+        console.log("after message commit")
 
         io.to(roomId).emit('message', { username: user.username, text: message });
         io.to(roomId).emit('roomData', {room: roomId, users: getUsersInRoom(roomId)})

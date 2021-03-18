@@ -65,6 +65,7 @@ exports.user_login = (req, res, next) => {
                         message: 'Auth failed'
                     });
                 }
+                console.log(result);
                 if(result) {
                     const token = jwt.sign({
                         username: user[0].username,

@@ -6,7 +6,7 @@ const InputBar = ({ setMessage, sendMessage, message }) => (
   <form className="form">
     <input
       className="input"
-      type="text"
+      type="textarea"
       placeholder="Type a message..."
       value={message}
       onChange={({ target: { value } }) => setMessage(value)}

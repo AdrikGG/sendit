@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component } from 'react';
-import ScrollToBottom from 'react-scroll-to-bottom';
+import { Form, InputGroup } from 'react-bootstrap';
 import io from 'socket.io-client';
 
 import './ChatRoom.css';
@@ -9,6 +9,7 @@ import Messages from '../Messages/Messages';
 import InputBar from '../InputBar/InputBar';
 
 let socket;
+let rId;
 
 class ChatRoom extends Component {
     state = {
@@ -24,6 +25,7 @@ class ChatRoom extends Component {
         const path = window.location.pathname.split('/');
         const roomId = path[path.length-1];
         console.log(roomId);
+        rId = roomId;
         this.getRoomData(roomId);
         this.getUserData();
         // this.state.users = this.getUserData();
@@ -32,13 +34,13 @@ class ChatRoom extends Component {
         this.sendMessage = this.sendMessage.bind(this);
 
         let URL = 'localhost:3000';
-        // URL += roomId;
         console.log(URL);
 
         socket = io(URL, { autoConnect: false });
         socket.onAny((event, ...args) => {
             console.log(event, args);
         });
+
         socket.connect();
 
         socket.emit('join', { token: this.state.token, roomId }, (error) => {
@@ -48,10 +50,13 @@ class ChatRoom extends Component {
         });
 
         socket.on('message', message => {
-            console.log("message socket");
+            // console.log("message socket");
+            // console.log(this.state.room);
+            // console.log(this.state.room.messages);
+            const r = this.state.room;
+            r.messages = [...r.messages, message];
+            this.setState({room: r});
             console.log(this.state.room);
-            console.log(this.state.room.messages);
-            this.setState({room: {messages: [...this.state.room.messages, message]}});
         });
 
         socket.on("roomData", ({ users }) => {
@@ -74,8 +79,8 @@ class ChatRoom extends Component {
         })
         const Json = await response.json();
         this.setState({room: Json});
-        console.log(this.state.room);
-        console.log(this.state.room.messages);
+        // console.log(this.state.room);
+        // console.log(this.state.room.messages);
     }
 
     async getUserData() {
@@ -89,27 +94,27 @@ class ChatRoom extends Component {
         const Json = await response.json();
         this.setState({user: Json.username});
         console.log(this.state.user);
+        this.showMessages();
     }
 
     sendMessage = (event) => {
         event.preventDefault();
 
-        console.log("In sendMessage");
-        console.log(this.state.message);
-
-        // if(this.room) {
-        //     this.setState({room: {messages: [...this.room.messages, m]}});
-        //     console.log(this.state.room.messages)
-        // }
+        // console.log("In sendMessage");
+        // console.log(this.state.message);
+        // console.log(this.state.room)
+        // console.log(this.state.room._id)
 
         if(this.state.message) {
             console.log(this.state.message);
             socket.emit('send message', this.state.message, this.state.room._id);
         }
         this.setMessage('');
+        window.scrollTo(0, document.body.scrollHeight);
     }
 
     setMessage(newMessage) {
+        window.scrollTo(0, document.body.scrollHeight);
         console.log("In setMessage")
         const m = {message: {text: newMessage, username: null}};
         this.setState({message: newMessage});
@@ -117,8 +122,7 @@ class ChatRoom extends Component {
 
     showMessages() {
         return (
-            // <ScrollToBottom className="messages">
-            <ul>
+            <div>
                 {this.state.room.messages.map((message, i) => {
                     return (
                         <div key={i}>
@@ -131,12 +135,12 @@ class ChatRoom extends Component {
                         </div>
                     )
                 })}
-            </ul>
-            // </ScrollToBottom>
+            </div>
         )
     }
 
     render() {
+        window.scrollTo(0, document.body.scrollHeight);
         if(!this.state.room) {
             return (
                 <div className="outerContainer"></div>
@@ -151,10 +155,17 @@ class ChatRoom extends Component {
             <div className="outerContainer">
                 <div className="container">
                     {this.showMessages()}
-                    {/* <Messages messages={this.state.room.messages} />*/}
                     <InputBar message={this.state.message} setMessage={this.setMessage} sendMessage={this.sendMessage} />
                 </div>
-                <UserBar users={this.state.users}/>
+                <div className="align-items-end">
+                    <div className="joinCode">
+                        <h1>Join Code:</h1>
+                        <h2>{rId}</h2>
+                    </div>
+                </div>
+                {/* <div>
+                    <UserBar users={this.state.users}/>
+                </div> */}
             </div>
         );
     }

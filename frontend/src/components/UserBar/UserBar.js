@@ -8,7 +8,7 @@ const UserBar = ({ users }) => (
       users
         ? (
           <div>
-            <h1>Users in this Room:</h1>
+            <h1>Active Users</h1>
             <div className="activeContainer">
               <h2>
                 {users.map(({name}) => (

@@ -137,16 +137,26 @@ class Dashboard extends Component {
         return (
             <ul>
                 {rooms.map((val, index) => {
+                    let usrnm;
+                    let msg;
+                    if(!val.lastMessage.username) {
+                        usrnm = "";
+                        msg = "No messages";
+                    } else {
+                        usrnm = val.lastMessage.username + ' ->';
+                        msg = val.lastMessage.text;
+                    }
                     return (
                         <div>
                             <div key={index} className="room-component">
                                 <Link className="room-link" to={`/room/${val.roomId}`}>
-                                    <h1>{val.roomName}</h1>
+                                    <h1 style={{marginBottom: '0.5rem'}}>{val.roomName}</h1>
                                 </Link>
                                 <button value="Delete" onClick={this.deleteRoom.bind(this, val)}>Delete Room</button>
                             </div>
-                            <div key={0-index} className="lastMessage">
-                                <h2>{val.lastMessage}</h2>
+                            <div key={0-index} className="lastMessage" style={{clear: 'both'}}>
+                                <h3 style={{float: 'left', marginTop: '0'}}>{usrnm}</h3>
+                                <h3 className="message" style={{float: 'left', paddingLeft: '10px', marginTop: '0'}}>{msg}</h3>
                             </div>
                         </div>
                     )

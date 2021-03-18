@@ -8,6 +8,7 @@ const mainNavigation = props => (
     <AuthContext.Consumer>
         {(context) => {
             return (
+                <div className="main">
                 <header className="main-navigation">
                     <div className="main-navigation__logo">
                         <h1>sendit</h1>
@@ -26,6 +27,7 @@ const mainNavigation = props => (
                         </ul>
                     </nav>
                 </header>
+                </div>
             )
         }}
     </AuthContext.Consumer>

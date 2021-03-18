@@ -74,8 +74,9 @@
     display: inline-block;
     width: 20rem;
     max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 0;
+    margin: auto 1rem;
+    margin-left: 0;
 }
 
 .room-component h1 {
@@ -98,4 +99,8 @@
 .room-component button:active {
     background: rgb(75, 75, 75);
     border-color: rgb(75, 75, 75);
+}
+
+.message {
+    width: 80%;
 }
