@@ -39,9 +39,8 @@ class SignupPage extends Component {
         }
       }
     );
-    console.log(response);
     const Json = await response.json();
-    console.log(Json);
+
     localStorage.setItem('token', Json.token);
     this.context.login(Json.token, Json.username, Json.userId);
     this.setState({ submitted: true });

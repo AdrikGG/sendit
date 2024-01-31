@@ -8,7 +8,6 @@ const mainNavigation = () => {
   return (
     <AuthContext.Consumer>
       {(context) => {
-        console.log(context);
         return (
           <div className="main">
             <header className="main-navigation">

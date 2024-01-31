@@ -40,7 +40,6 @@ class LoginPage extends Component {
       }
     );
     const Json = await response.json();
-    console.log(Json);
 
     if (response.status === 200) {
       localStorage.setItem('token', Json.token);

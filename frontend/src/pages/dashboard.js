@@ -33,7 +33,6 @@ class Dashboard extends Component {
         }
       }
     );
-    // console.log(request);
     const response = await fetch(request);
     const Json = await response.json();
 
@@ -42,7 +41,6 @@ class Dashboard extends Component {
       return;
     } else {
       this.setState({ rooms: Json.rooms });
-      // console.log(this.state.rooms);
     }
   }
 
@@ -69,7 +67,6 @@ class Dashboard extends Component {
       }
     );
     const Json = await response.json();
-    console.log(Json.createdRoom);
 
     if (response.status === 401) {
       window.location.href = '/user/login';
@@ -118,14 +115,12 @@ class Dashboard extends Component {
       }
     );
     const Json = await response.json();
-    console.log(Json);
 
     if (response.status === 401) {
       window.location.href = '/user/login';
       return;
     }
 
-    console.log(Json.joinedRoom);
     if (Json.error) {
       return;
     }
@@ -174,7 +169,6 @@ class Dashboard extends Component {
 
   listRooms() {
     let rooms = this.state.rooms;
-    // console.log(this.state.rooms);
     return (
       <ul>
         {rooms.map((val, index) => {

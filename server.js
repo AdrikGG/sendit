@@ -14,7 +14,7 @@ const Room = require('./api/models/room');
 
 const io = socketio(server, {
   cors: {
-    origin: 'https://adrikgg.github.io/sendit',
+    origin: 'https://adrikgg.github.io',
     methods: ['GET', 'POST']
   }
 });
@@ -26,7 +26,6 @@ io.on('connection', (socket) => {
   socket.join(id);
 
   socket.on('join', async ({ token, roomId }) => {
-    console.log('In join (server)');
     try {
       const room = await findRoom(roomId);
 
@@ -55,7 +54,6 @@ io.on('connection', (socket) => {
   });
 
   socket.on('send message', async (message, roomId) => {
-    console.log('In send message (server)');
     const user = getUser(socket.id);
     if (!user) {
       console.log('Server restart needed');
@@ -75,8 +73,6 @@ io.on('connection', (socket) => {
     });
 
     await findRoom(roomId);
-
-    console.log('after message commit');
 
     io.to(roomId).emit('message', { username: user.username, text: message });
     io.to(roomId).emit('roomData', {
