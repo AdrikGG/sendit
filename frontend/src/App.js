@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 import SignupPage from './pages/signup';
@@ -17,24 +17,46 @@ class App extends Component {
     userId: null
   };
 
+  componentDidMount() {
+    const storedToken = localStorage.getItem('token');
+    const storedUsername = localStorage.getItem('username');
+    const storedUserId = localStorage.getItem('userId');
+
+    if (storedToken && storedUsername && storedUserId) {
+      this.setState({
+        token: storedToken,
+        username: storedUsername,
+        userId: storedUserId
+      });
+    }
+  }
+
   login = (token, username, userId) => {
-    this.setState({token: token, username: username, userId: userId}, function(){console.log(this.state)});
+    this.setState({ token, username, userId }, () => {
+      localStorage.setItem('token', token);
+      localStorage.setItem('username', username);
+      localStorage.setItem('userId', userId);
+    });
   };
 
   logout = () => {
-    this.setState({token: null, username: null, userId: null});
+    this.setState({ token: null, username: null, userId: null }, () => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('username');
+      localStorage.removeItem('userId');
+    });
   };
 
   render() {
     return (
       <BrowserRouter>
         <React.Fragment>
-          <AuthContext.Provider 
+          <AuthContext.Provider
             value={{
-              token: this.state.token, 
+              token: this.state.token,
               username: this.state.username,
-              userId: this.state.userId, 
-              login: this.login, 
+              userId: this.state.userId,
+              login: this.login,
               logout: this.logout
             }}
           >

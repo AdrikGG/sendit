@@ -8,7 +8,7 @@ router.post('/signup', UserController.user_signup);
 
 router.post('/login', UserController.user_login);
 
-router.get('/', UserController.users_get);
+router.get('/users', UserController.users_get);
 
 router.post('/', UserController.user_post);
 

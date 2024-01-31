@@ -1,35 +1,17 @@
 import React from 'react';
-import ScrollToBottom from 'react-scroll-to-bottom';
 
 import Message from '../Message/Message';
 
 import './Messages.css';
 
-const Messages = ({ messages }) => {
-  console.log("In messages");
+const Messages = ({ messages, containerRef }) => {
   return (
-    <ScrollToBottom className="messages">
-      {messages.map((message, i) => <div key={i}><Message message={message} /></div>)}
-    </ScrollToBottom>
-  )
+    <div className="messages" ref={containerRef}>
+      {messages.map((message, i) => (
+        <Message key={i} message={message} />
+      ))}
+    </div>
+  );
 };
 
 export default Messages;
-
-// export default function Messages() {
-//   console.log(messages);
-//   console.log("In messages");
-//   if(messages.length > 0) {
-//     console.log("condition 1");
-//     return (
-//       <ScrollToBottom className="messages">
-//         {messages.map((message, i) => <div key={i}><Message message={message} /></div>)}
-//       </ScrollToBottom>
-//     )
-//   } else {
-//     console.log("condition 2");
-//     return (
-//       <ScrollToBottom className="messages"></ScrollToBottom>
-//     )
-//   }
-// };

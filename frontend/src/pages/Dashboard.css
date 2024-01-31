@@ -1,106 +1,106 @@
 .create-room {
-    display: inline-block;
-    width: 40rem;
-    max-width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+  display: inline-block;
+  width: 40rem;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .create-room label,
 .create-room input {
-    width: 30%;
-    margin: 1em;
-    max-height: 2em;
+  width: 30%;
+  margin: 1em;
+  max-height: 2em;
 }
 
 .create-room button {
-    background: grey;
-    font: inherit;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 0.25rem 1rem;
-    margin: 1rem;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
-    color: white;
+  background: grey;
+  font: inherit;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 0.25rem 1rem;
+  margin: 1rem;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
+  color: white;
 }
 
 .create-room button:hover,
 .create-room button:active {
-    background: rgb(75, 75, 75);
-    border-color: rgb(75, 75, 75);
+  background: rgb(75, 75, 75);
+  border-color: rgb(75, 75, 75);
 }
 
 .join-room {
-    display: inline-block;
-    width: 40rem;
-    max-width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+  display: inline-block;
+  width: 40rem;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .join-room label,
 .join-room input {
-    width: 30%;
-    margin: 1.56em;
-    max-height: 2em;
+  width: 30%;
+  margin: 1.56em;
+  max-height: 2em;
 }
 
 .join-room button {
-    background: grey;
-    font: inherit;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 0.25rem 1rem;
-    margin: 0.65rem;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
-    color: white;
+  background: grey;
+  font: inherit;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 0.25rem 1rem;
+  margin: 0.65rem;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
+  color: white;
 }
 
 .join-room button:hover,
 .join-room button:active {
-    background: rgb(75, 75, 75);
-    border-color: rgb(75, 75, 75);
+  background: rgb(75, 75, 75);
+  border-color: rgb(75, 75, 75);
 }
 
 .room-component {
-    display: inline-block;
-    width: 40rem;
-    max-width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+  display: inline-block;
+  width: 40rem;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .room-link {
-    display: inline-block;
-    width: 20rem;
-    max-width: 100%;
-    padding: 0;
-    margin: auto 1rem;
-    margin-left: 0;
+  display: inline-block;
+  width: 20rem;
+  max-width: 100%;
+  padding: 0;
+  margin: auto 1rem;
+  margin-left: 0;
 }
 
 .room-component h1 {
-    width: 100%;
+  width: 100%;
 }
 
 .room-component button {
-    background: grey;
-    font: inherit;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 0.25rem 1rem;
-    margin-left: auto;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
-    color: white;
-    justify-self: end;
+  background: grey;
+  font: inherit;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 0.25rem 1rem;
+  margin-left: auto;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
+  color: white;
+  justify-self: end;
 }
 
 .room-component button:hover,
 .room-component button:active {
-    background: rgb(75, 75, 75);
-    border-color: rgb(75, 75, 75);
+  background: rgb(75, 75, 75);
+  border-color: rgb(75, 75, 75);
 }
 
 .message {
-    width: 80%;
+  width: 80%;
 }
