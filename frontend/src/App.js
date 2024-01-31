@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { HashRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 import SignupPage from './pages/signup';
 import LoginPage from './pages/login';
@@ -49,7 +49,7 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
+      <HashRouter>
         <React.Fragment>
           <AuthContext.Provider
             value={{
@@ -72,7 +72,7 @@ class App extends Component {
             </main>
           </AuthContext.Provider>
         </React.Fragment>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }
