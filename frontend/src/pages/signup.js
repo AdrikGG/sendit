@@ -29,13 +29,16 @@ class SignupPage extends Component {
       password: password
     };
 
-    const response = await fetch('http://localhost:3000/user/signup', {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json'
+    const response = await fetch(
+      'https://sendit-production.up.railway.app/user/signup',
+      {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }
-    });
+    );
     console.log(response);
     const Json = await response.json();
     console.log(Json);

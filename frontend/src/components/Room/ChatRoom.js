@@ -26,7 +26,7 @@ class ChatRoom extends Component {
     const roomId = path[path.length - 1];
     rId = roomId;
 
-    let URL = 'localhost:3000';
+    let URL = 'sendit-production.up.railway.app';
     socket = io(URL, { autoConnect: false });
     socket.connect();
 
@@ -54,13 +54,16 @@ class ChatRoom extends Component {
   }
 
   async getRoomData(roomId) {
-    const response = await fetch(`http://localhost:3000/room/${roomId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + this.state.token
+    const response = await fetch(
+      `https://sendit-production.up.railway.app/room/${roomId}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + this.state.token
+        }
       }
-    });
+    );
 
     if (response.ok) {
       const Json = await response.json();
@@ -72,7 +75,7 @@ class ChatRoom extends Component {
 
   async getUsersData(roomId) {
     const response = await fetch(
-      `http://localhost:3000/user/users?roomId=${roomId}`,
+      `https://sendit-production.up.railway.app/user/users?roomId=${roomId}`,
       {
         method: 'GET',
         headers: {

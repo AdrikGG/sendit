@@ -29,13 +29,16 @@ class LoginPage extends Component {
       password: password
     };
 
-    const response = await fetch('http://localhost:3000/user/login', {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json'
+    const response = await fetch(
+      'https://sendit-production.up.railway.app/user/login',
+      {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }
-    });
+    );
     const Json = await response.json();
     console.log(Json);
 

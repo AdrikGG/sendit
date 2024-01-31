@@ -14,7 +14,7 @@ const Room = require('./api/models/room');
 
 const io = socketio(server, {
   cors: {
-    origin: 'http://localhost:3001',
+    origin: 'https://adrikgg.github.io/sendit',
     methods: ['GET', 'POST']
   }
 });

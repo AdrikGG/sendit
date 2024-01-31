@@ -23,13 +23,16 @@ class Dashboard extends Component {
   async displayRooms() {
     const token = localStorage.getItem('token');
 
-    let request = new Request('http://localhost:3000/dashboard', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token
+    let request = new Request(
+      'https://sendit-production.up.railway.app/dashboard',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token
+        }
       }
-    });
+    );
     // console.log(request);
     const response = await fetch(request);
     const Json = await response.json();
@@ -54,14 +57,17 @@ class Dashboard extends Component {
       name: roomname
     };
 
-    const response = await fetch('http://localhost:3000/room/create', {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token
+    const response = await fetch(
+      'https://sendit-production.up.railway.app/room/create',
+      {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token
+        }
       }
-    });
+    );
     const Json = await response.json();
     console.log(Json.createdRoom);
 
@@ -94,20 +100,23 @@ class Dashboard extends Component {
     const token = localStorage.getItem('token');
     const roomId = this.roomidEl.current.value;
 
-    // if not propper string, then return
+    // if not proper string, then return
 
     const body = {
       id: roomId
     };
 
-    const response = await fetch('http://localhost:3000/room/join', {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token
+    const response = await fetch(
+      'https://sendit-production.up.railway.app/room/join',
+      {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token
+        }
       }
-    });
+    );
     const Json = await response.json();
     console.log(Json);
 
@@ -146,13 +155,16 @@ class Dashboard extends Component {
     this.setState({ rooms: rooms });
 
     const token = localStorage.getItem('token');
-    const response = await fetch(`http://localhost:3000/room/${room.roomId}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token
+    const response = await fetch(
+      `https://sendit-production.up.railway.app/room/${room.roomId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token
+        }
       }
-    });
+    );
 
     if (response.status === 401) {
       window.location.href = '/user/login';
