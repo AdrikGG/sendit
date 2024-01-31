@@ -22,7 +22,7 @@ class ChatRoom extends Component {
   constructor(props) {
     super(props);
     this.messagesContainerRef = createRef();
-    const path = window.location.pathname.split('/');
+    const path = window.location.hash.split('/');
     const roomId = path[path.length - 1];
     rId = roomId;
 
