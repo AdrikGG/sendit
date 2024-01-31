@@ -23,7 +23,7 @@ mongoose.connection.once('open', () => {
   console.log('MongoDB Connected');
 });
 
-app.use('/', express.static('./frontend/build'));
+// app.use('/', express.static('./frontend/build'));
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -31,6 +31,7 @@ app.use(bodyParser.json());
 
 // CORS error handling
 app.use((req, res, next) => {
+  console.log('Request origin: ', req.get('Origin'));
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
     'Access-Control-Allow-Headers',
